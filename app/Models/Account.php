@@ -78,7 +78,6 @@ class Account extends Model
         } else {
             $this->current_balance = $this->opening_balance + $creditTotal - $debitTotal;
         }
-
         $this->save();
     }
 

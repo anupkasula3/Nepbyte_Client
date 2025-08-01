@@ -122,7 +122,6 @@ class ExpenseCategoryController extends Controller
         $expenseCategory->save();
 
         $status = $expenseCategory->is_active ? 'activated' : 'deactivated';
-
         return back()->with('success', "Category {$status} successfully.");
     }
 

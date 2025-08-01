@@ -93,7 +93,6 @@ class BudgetController extends Controller
     public function show(Budget $budget)
     {
         $budget->load(['creator', 'items.account', 'items.expenseCategory']);
-
         // Calculate progress for each item
         foreach ($budget->items as $item) {
             // Here you would calculate actual amounts based on expenses/transactions
@@ -116,7 +115,6 @@ class BudgetController extends Controller
         $accounts = Account::where('type', 'expense')->where('is_active', true)->get();
         $expenseCategories = ExpenseCategory::where('is_active', true)->get();
         $budget->load('items');
-
         return view('admin.budgets.edit', compact('budget', 'accounts', 'expenseCategories'));
     }
 
@@ -196,7 +194,6 @@ class BudgetController extends Controller
         if ($budget->status === 'draft') {
             $budget->status = 'active';
             $budget->save();
-
             return back()->with('success', 'Budget activated successfully.');
         }
 
@@ -208,7 +205,6 @@ class BudgetController extends Controller
         if ($budget->status === 'active') {
             $budget->status = 'completed';
             $budget->save();
-
             return back()->with('success', 'Budget marked as completed.');
         }
 

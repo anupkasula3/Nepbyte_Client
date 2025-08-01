@@ -126,7 +126,6 @@ class PaymentController extends Controller
                 ->where('id', '!=', $payment->id)
                 ->where('status', 'completed')
                 ->sum('amount');
-
             if (($currentPayments + $request->amount) > $invoice->total_amount) {
                 return back()->withInput()->withErrors([
                     'amount' => 'Total payments cannot exceed the invoice amount.'

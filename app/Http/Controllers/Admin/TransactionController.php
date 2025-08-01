@@ -55,13 +55,11 @@ class TransactionController extends Controller
         foreach ($request->items as $index => $item) {
             $hasDebit = !empty($item['debit_amount']) && $item['debit_amount'] > 0;
             $hasCredit = !empty($item['credit_amount']) && $item['credit_amount'] > 0;
-
             if (!$hasDebit && !$hasCredit) {
                 return back()->withInput()->withErrors([
                     "items.{$index}.debit_amount" => 'Each item must have either a debit or credit amount.'
                 ]);
             }
-
             if ($hasDebit && $hasCredit) {
                 return back()->withInput()->withErrors([
                     "items.{$index}.debit_amount" => 'Each item cannot have both debit and credit amounts.'
@@ -114,7 +112,6 @@ class TransactionController extends Controller
     public function show(Transaction $transaction)
     {
         $transaction->load(['creator', 'items.account']);
-
         return view('admin.transactions.show', compact('transaction'));
     }
 
@@ -127,7 +124,6 @@ class TransactionController extends Controller
 
         $accounts = Account::where('is_active', true)->orderBy('code')->get();
         $transaction->load('items');
-
         return view('admin.transactions.edit', compact('transaction', 'accounts'));
     }
 
@@ -155,13 +151,11 @@ class TransactionController extends Controller
         foreach ($request->items as $index => $item) {
             $hasDebit = !empty($item['debit_amount']) && $item['debit_amount'] > 0;
             $hasCredit = !empty($item['credit_amount']) && $item['credit_amount'] > 0;
-
             if (!$hasDebit && !$hasCredit) {
                 return back()->withInput()->withErrors([
                     "items.{$index}.debit_amount" => 'Each item must have either a debit or credit amount.'
                 ]);
             }
-
             if ($hasDebit && $hasCredit) {
                 return back()->withInput()->withErrors([
                     "items.{$index}.debit_amount" => 'Each item cannot have both debit and credit amounts.'
@@ -234,7 +228,6 @@ class TransactionController extends Controller
 
         try {
             $transaction->post();
-
             return back()->with('success', 'Transaction posted successfully.');
         } catch (\Exception $e) {
             return back()->with('error', 'Error posting transaction: ' . $e->getMessage());

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Account;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -30,7 +30,6 @@ class AccountController extends Controller
     public function create()
     {
         $parentAccounts = Account::where('is_active', true)->orderBy('code')->get();
-
         return view('admin.accounts.create', compact('parentAccounts'));
     }
 
@@ -64,7 +63,6 @@ class AccountController extends Controller
     public function show(Account $account)
     {
         $account->load(['parent', 'children', 'transactionItems.transaction']);
-
         // Get recent transactions for this account
         $recentTransactions = $account->transactionItems()
             ->with('transaction')
@@ -81,7 +79,6 @@ class AccountController extends Controller
             ->where('id', '!=', $account->id)
             ->orderBy('code')
             ->get();
-
         return view('admin.accounts.edit', compact('account', 'parentAccounts'));
     }
 
@@ -149,7 +146,6 @@ class AccountController extends Controller
         $account->save();
 
         $status = $account->is_active ? 'activated' : 'deactivated';
-
         return back()->with('success', "Account {$status} successfully.");
     }
 
@@ -196,7 +192,6 @@ class AccountController extends Controller
         foreach ($accounts as $account) {
             $debitBalance = $account->transactionItems()->sum('debit_amount');
             $creditBalance = $account->transactionItems()->sum('credit_amount');
-
             if (in_array($account->type, ['asset', 'expense'])) {
                 $account->trial_balance = $account->opening_balance + $debitBalance - $creditBalance;
                 if ($account->trial_balance > 0) {
