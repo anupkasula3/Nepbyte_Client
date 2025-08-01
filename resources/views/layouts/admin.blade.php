@@ -74,6 +74,55 @@
                         <i class="fas fa-laptop mr-3"></i>
                         Equipment
                     </a>
+
+                    <!-- Accounting Section -->
+                    <div class="mt-6">
+                        <div class="px-4 py-2">
+                            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Accounting</h3>
+                        </div>
+
+                        <!-- Accounting Dashboard -->
+                        <a href="{{ route('admin.accounting.index') }}"
+                           class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors duration-200 {{ request()->routeIs('admin.accounting.index') ? 'bg-gray-700 text-white' : '' }}">
+                            <i class="fas fa-chart-pie mr-3"></i>
+                            Dashboard
+                        </a>
+
+                        <!-- Invoices -->
+                        <a href="{{ route('admin.invoices.index') }}"
+                           class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors duration-200 {{ request()->routeIs('admin.invoices.*') ? 'bg-gray-700 text-white' : '' }}">
+                            <i class="fas fa-file-invoice mr-3"></i>
+                            Invoices
+                        </a>
+
+                        <!-- Expenses -->
+                        <a href="{{ route('admin.expenses.index') }}"
+                           class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors duration-200 {{ request()->routeIs('admin.expenses.*') ? 'bg-gray-700 text-white' : '' }}">
+                            <i class="fas fa-receipt mr-3"></i>
+                            Expenses
+                        </a>
+
+                        <!-- Payments -->
+                        <a href="{{ route('admin.payments.index') }}"
+                           class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors duration-200 {{ request()->routeIs('admin.payments.*') ? 'bg-gray-700 text-white' : '' }}">
+                            <i class="fas fa-credit-card mr-3"></i>
+                            Payments
+                        </a>
+
+                        <!-- Budgets -->
+                        <a href="{{ route('admin.budgets.index') }}"
+                           class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors duration-200 {{ request()->routeIs('admin.budgets.*') ? 'bg-gray-700 text-white' : '' }}">
+                            <i class="fas fa-calculator mr-3"></i>
+                            Budgets
+                        </a>
+
+                        <!-- Reports -->
+                        <a href="{{ route('admin.accounting.reports') }}"
+                           class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md transition-colors duration-200 {{ request()->routeIs('admin.accounting.reports') || request()->routeIs('admin.accounting.profit-loss') ? 'bg-gray-700 text-white' : '' }}">
+                            <i class="fas fa-chart-bar mr-3"></i>
+                            Reports
+                        </a>
+                    </div>
                 </div>
             </nav>
         </div>
