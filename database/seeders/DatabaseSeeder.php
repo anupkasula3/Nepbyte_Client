@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             TaskSeeder::class,
             ProjectTeamSeeder::class,
             NotificationSeeder::class,
+            AccountingSeeder::class,
         ]);
 
         User::factory()->create([
